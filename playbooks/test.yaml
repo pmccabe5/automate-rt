@@ -1,0 +1,81 @@
+---
+
+- name: ping
+  hosts: test
+  tasks: 
+    - name: ping test
+      ping:
+
+- name: welcome message
+  hosts: test
+  tasks:
+    command: wall "Hello everyone! Ready to play a game?"
+
+- name: install packages
+  hosts: test
+  become: true
+  tasks:
+
+    - name: update repos
+      apt:
+        update_cache: yes
+
+    - name: install packages
+      apt:
+        name: python3
+        state: latest
+      apt:
+        name: python3-pip
+        state: latest
+      apt:
+        name: ufw
+        state: latest 
+      apt:
+        name: ncat
+        state: latest
+      apt:
+        name: git
+        state: latest 
+
+- name: installing fun stuff
+  hosts: test
+  become: true
+  tasks:
+
+    - name: making swsh dir
+      command: mkdir /bin/swsh
+
+    - name: cloning starwars shell
+      git:
+        repo: https://github.com/moloch--/swsh.git
+        dest: /bin/swsh
+        clone: yes
+
+- name: misconfiguring ufw
+  hosts: test
+  become: true
+  tasks:
+
+    - name: rewriting rules
+      ufw:
+        state: enabled
+        rule: allow
+      ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+        ufw:
+        rule: allow
+        port: '22'
+        proto: udp
+      ufw: 
+        rule: allow
+        port: 1025:65535
+        proto: tcp
+      ufw: 
+        rule: allow
+        port: 1025:65535
+        proto: udp
+      ufw:
+        state: reloaded
+      
