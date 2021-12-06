@@ -4,12 +4,7 @@
   hosts: test
   tasks: 
     - name: ping test
-      ping:
-
-- name: welcome message
-  hosts: test
-  tasks:
-    command: wall "Hello everyone! Ready to play a game?"
+      ping: 
 
 - name: install packages
   hosts: test
@@ -64,7 +59,7 @@
         rule: allow
         port: '22'
         proto: tcp
-        ufw:
+      ufw:
         rule: allow
         port: '22'
         proto: udp
