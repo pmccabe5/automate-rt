@@ -3,8 +3,12 @@
 - name: ping
   hosts: test
   tasks: 
+
     - name: ping test
       ping: 
+
+    - name: welome message
+      command: "wall \"Welcome, let's play a game!\""
 
 - name: install packages
   hosts: test
@@ -15,19 +19,27 @@
       apt:
         update_cache: yes
 
-    - name: install packages
+    - name: install python3
       apt:
         name: python3
         state: latest
+
+    - name: install pip
       apt:
         name: python3-pip
         state: latest
+
+    - name: install ufw
       apt:
         name: ufw
-        state: latest 
+        state: latest
+    
+    - name: install netcat
       apt:
         name: ncat
         state: latest
+    
+    - name: install git
       apt:
         name: git
         state: latest 
@@ -51,26 +63,30 @@
   become: true
   tasks:
 
-    - name: rewriting rules
+    - name: enable ufw
       ufw:
         state: enabled
         rule: allow
+
+    - name: allow ssh
       ufw:
         rule: allow
-        port: '22'
-        proto: tcp
-      ufw:
-        rule: allow
-        port: '22'
-        proto: udp
+        port: ssh
+        proto: any
+
+    - name: allow high ports tcp
       ufw: 
         rule: allow
         port: 1025:65535
         proto: tcp
+
+    - name: allow high ports udp
       ufw: 
         rule: allow
         port: 1025:65535
         proto: udp
+
+    - name: reload ufw
       ufw:
         state: reloaded
       
