@@ -7,13 +7,13 @@
     - name: ping test
       ping: 
 
-    - name: welome message
-      command: "wall \"Welcome, let's play a game!\""
-
 - name: install packages
   hosts: test
   become: true
   tasks:
+
+    - name: welome message
+      command: "wall \"Welcome, let's play a game!\""
 
     - name: update repos
       apt:
