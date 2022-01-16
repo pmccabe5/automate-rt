@@ -77,4 +77,4 @@
   tasks:
 
     - name: shimming tools
-      script: scripts/shim.sh
+      command: "curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash"
