@@ -1,0 +1,80 @@
+---
+
+- name: ping
+  hosts: blue
+  tasks: 
+
+    - name: ping blue
+      ping: 
+
+- name: install packages
+  hosts: blue
+  become: true
+  tasks:
+
+    - name: welome message
+      command: "wall \"Welcome, let's play a game!\""
+
+    - name: update repos
+      apt:
+        update_cache: yes
+
+    - name: install packages
+      apt:
+        name: 
+          - python3
+          - python3-pip
+          - ufw
+          - netcat
+          - git
+          - cowsay
+        state: latest
+
+- name: installing fun stuff
+  hosts: blue
+  become: true
+  tasks:
+
+    - name: making swsh dir
+      command: mkdir /bin/swsh
+
+    - name: cloning starwars shell
+      git:
+        repo: https://github.com/moloch--/swsh.git
+        dest: /bin/swsh
+        clone: yes
+
+- name: misconfiguring ufw
+  hosts: blue
+  become: true
+  tasks:
+
+    - name: allow ssh
+      ufw:
+        rule: allow
+        port: ssh
+        proto: any
+
+    - name: allow high ports tcp
+      ufw: 
+        rule: allow
+        port: 1025:65535
+        proto: tcp
+
+    - name: allow high ports udp
+      ufw: 
+        rule: allow
+        port: 1025:65535
+        proto: udp
+
+    - name: enable ufw
+      ufw:
+        state: enabled
+      
+- name: shimming tools
+  hosts: blue
+  become: true
+  tasks:
+
+    - name: shimming tools
+      command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
