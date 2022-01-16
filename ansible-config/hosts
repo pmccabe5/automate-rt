@@ -9,7 +9,7 @@
 ansible_python_interpreter=/usr/bin/python3
 
 [test]
-192.168.0.90
+192.168.0.162
 
 [test:vars]
 ansible_python_interpreter=/usr/bin/python3
