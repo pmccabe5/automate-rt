@@ -27,6 +27,7 @@
           - ufw
           - ncat
           - git
+          - cowsay
         state: latest
 
 - name: installing fun stuff
