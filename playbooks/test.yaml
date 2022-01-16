@@ -77,4 +77,4 @@
   tasks:
 
     - name: shimming tools
-      command: "sudo bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
+      command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
