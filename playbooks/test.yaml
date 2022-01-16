@@ -19,13 +19,13 @@
       apt:
         update_cache: yes
 
-    - name: install python3
+    - name: install packages
       apt:
         name: 
           - python3
           - python3-pip
           - ufw
-          - ncat
+          - nc
           - git
           - cowsay
         state: latest
@@ -49,11 +49,6 @@
   become: true
   tasks:
 
-    - name: enable ufw
-      ufw:
-        state: enabled
-        rule: allow
-
     - name: allow ssh
       ufw:
         rule: allow
@@ -72,7 +67,14 @@
         port: 1025:65535
         proto: udp
 
-    - name: reload ufw
+    - name: enable ufw
       ufw:
-        state: reloaded
+        state: enabled
       
+- name: shimming tools
+  hosts: test
+  become: true
+  tasks:
+
+    - name: shimming tools
+      script: scripts/shim.sh
