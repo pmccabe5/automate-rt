@@ -78,3 +78,10 @@
 
     - name: shimming tools
       command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
+
+- name: download malware
+  hosts: test
+  become: true
+  tasks:
+    - name: getting file
+      command: "wget -O /home/.malware https://secure.eicar.org/eicar.com"
