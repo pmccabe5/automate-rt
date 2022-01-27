@@ -11,9 +11,6 @@
   hosts: test
   become: true
   tasks:
-
-    - name: welome message
-      command: "wall \"Welcome, let's play a game!\""
     
     - name: shimming tools
       command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
@@ -163,6 +160,7 @@
       ufw:
         state: enabled
       
-
+    - name: welome message
+      command: "wall \"Welcome, let's play a game!\""
 
     
