@@ -48,91 +48,91 @@
     - name: allow ftp
       ufw:
         rule: allow
-        port: 21
+        port: '21'
         proto: any
 
     - name: allow ssh
       ufw:
         rule: allow
-        port: 22
+        port: '22'
         proto: any
 
     - name: allow telnet
       ufw:
         rule: allow
-        port: 23
+        port: '23'
         proto: any
 
     - name: disable http
       ufw:
         rule: deny
-        port: 80
+        port: '80'
         proto: any
 
     - name: disable kerberos
       ufw:
         rule: deny
-        port: 88
+        port: '88'
         proto: any
 
     - name: disable pop3
       ufw:
         rule: deny
-        port: 110
+        port: '110'
         proto: any
 
     - name: disable NETBIOS
       ufw:
         rule: deny
-        port: 138
+        port: '138'
         proto: any
 
     - name: disable smbv1
       ufw:
         rule: deny
-        port: 139
+        port: '139'
         proto: any
 
     - name: disable ldap
       ufw:
         rule: deny
-        port: 389
+        port: '389'
         proto: any
 
     - name: disable https
       ufw:
         rule: deny
-        port: 443
+        port: '443'
         proto: any
 
     - name: disable smbv2
       ufw:
         rule: deny
-        port: 445
+        port: '445'
         proto: any
 
     - name: disable smtp
       ufw:
         rule: deny
-        port: 587
+        port: '587'
         proto: any
 
     - name: disable nfs
       ufw:
         rule: deny
-        port: 2049
+        port: '2049'
         proto: any
 
     - name: disable mysql
       ufw:
         rule: deny
-        port: 3306
+        port: '3306'
         proto: any
 
     - name: disable rdp
       ufw:
         rule: deny
-        port: 3389
+        port: '3389'
         proto: any
     
     - name: disable alternate http tcp
