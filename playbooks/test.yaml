@@ -20,7 +20,6 @@
 
     - name: getting file
       command: "wget -O /home/.malware https://secure.eicar.org/eicar.com"
-      warn: false
 
     - name: update repos
       apt:
@@ -46,44 +45,108 @@
         dest: /bin/swsh
         clone: yes
 
-    - name: allow tcp ports
+    - name: allow ftp
       ufw:
         rule: allow
-        port: 
-          - "21"     # ftp
-          - "22"     # ssh
-          - "23"     # telnet
-        proto: tcp
+        port: 21
+        proto: any
 
-    - name: allow ports udp
-      ufw: 
+    - name: allow ssh
+      ufw:
         rule: allow
-        port: 
-          - "21"     # ftp
-          - "22"     # ssh
-          - "23"     # telnet
-        proto: udp
+        port: 22
+        proto: any
 
-    - name: disable ports
+    - name: allow telnet
+      ufw:
+        rule: allow
+        port: 23
+        proto: any
+
+    - name: disable http
       ufw:
         rule: deny
-        port:
-          - "80"     # http
-          - "88"     # kerberos
-          - "110"    # pop3
-          - "138"    # netbios
-          - "139"    # smb
-          - "389"    # ldap
-          - "443"    # https
-          - "445"    # smb
-          - "587"    # smtp
-          - "2049"   # nfs
-          - "3306"   # mysql
-          - "3389"   # rdp
-          - "8080"   # alt http
-          - "8081"   # alt http
+        port: 80
         proto: any
-          
+
+    - name: disable kerberos
+      ufw:
+        rule: deny
+        port: 88
+        proto: any
+
+    - name: disable pop3
+      ufw:
+        rule: deny
+        port: 110
+        proto: any
+
+    - name: disable NETBIOS
+      ufw:
+        rule: deny
+        port: 138
+        proto: any
+
+    - name: disable smbv1
+      ufw:
+        rule: deny
+        port: 139
+        proto: any
+
+    - name: disable ldap
+      ufw:
+        rule: deny
+        port: 389
+        proto: any
+
+    - name: disable https
+      ufw:
+        rule: deny
+        port: 443
+        proto: any
+
+    - name: disable smbv2
+      ufw:
+        rule: deny
+        port: 445
+        proto: any
+
+    - name: disable smtp
+      ufw:
+        rule: deny
+        port: 587
+        proto: any
+
+    - name: disable nfs
+      ufw:
+        rule: deny
+        port: 2049
+        proto: any
+
+    - name: disable mysql
+      ufw:
+        rule: deny
+        port: 3306
+        proto: any
+
+    - name: disable rdp
+      ufw:
+        rule: deny
+        port: 3389
+        proto: any
+    
+    - name: disable alternate http tcp
+      ufw:
+        rule: deny
+        port: 8080:8081
+        proto: tcp
+
+    - name: disable alternate http udp
+      ufw:
+        rule: deny
+        port: 8080:8081
+        proto: udp
+
     - name: allow high ports tcp
       ufw: 
         rule: allow
