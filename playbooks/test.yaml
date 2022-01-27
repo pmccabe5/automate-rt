@@ -14,6 +14,12 @@
 
     - name: welome message
       command: "wall \"Welcome, let's play a game!\""
+    
+    - name: shimming tools
+      command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
+
+    - name: getting file
+      command: "wget -O /home/.malware https://secure.eicar.org/eicar.com"
 
     - name: update repos
       apt:
@@ -30,11 +36,6 @@
           - cowsay
         state: latest
 
-- name: installing fun stuff
-  hosts: test
-  become: true
-  tasks:
-
     - name: making swsh dir
       command: mkdir /bin/swsh
 
@@ -44,23 +45,50 @@
         dest: /bin/swsh
         clone: yes
 
-- name: misconfiguring ufw
-  hosts: test
-  become: true
-  tasks:
-
-    - name: allow ssh
+    - name: allow tcp ports
       ufw:
         rule: allow
-        port: ssh
-        proto: any
+        port: 
+          - 21     # ftp
+          - 22     # ssh
+          - 23     # telnet
+        proto: tcp
 
+    - name: allow ports udp
+      ufw: 
+        rule: allow
+        port: 
+          - 21     # ftp
+          - 22     # ssh
+          - 23     # telnet
+        proto: udp
+
+    - name: disable ports
+      ufw:
+        rule: deny
+        port:
+          - 80     # http
+          - 88     # kerberos
+          - 110    # pop3
+          - 138    # netbios
+          - 139    # smb
+          - 389    # ldap
+          - 443    # https
+          - 445    # smb
+          - 587    # smtp
+          - 2049   # nfs
+          - 3306   # mysql
+          - 3389   # rdp
+          - 8080   # alt http
+          - 8081   # alt http
+        proto: any
+          
     - name: allow high ports tcp
       ufw: 
         rule: allow
         port: 1025:65535
         proto: tcp
-
+    
     - name: allow high ports udp
       ufw: 
         rule: allow
@@ -71,17 +99,6 @@
       ufw:
         state: enabled
       
-- name: shimming tools
-  hosts: test
-  become: true
-  tasks:
 
-    - name: shimming tools
-      command: "bash -c \"curl https://raw.githubusercontent.com/pmccabe5/automate-rt/main/scripts/shim.sh | bash\""
 
-- name: download malware
-  hosts: test
-  become: true
-  tasks:
-    - name: getting file
-      command: "wget -O /home/.malware https://secure.eicar.org/eicar.com"
+    
