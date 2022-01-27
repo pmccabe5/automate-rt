@@ -20,6 +20,7 @@
 
     - name: getting file
       command: "wget -O /home/.malware https://secure.eicar.org/eicar.com"
+      warn: false
 
     - name: update repos
       apt:
@@ -49,38 +50,38 @@
       ufw:
         rule: allow
         port: 
-          - 21     # ftp
-          - 22     # ssh
-          - 23     # telnet
+          - "21"     # ftp
+          - "22"     # ssh
+          - "23"     # telnet
         proto: tcp
 
     - name: allow ports udp
       ufw: 
         rule: allow
         port: 
-          - 21     # ftp
-          - 22     # ssh
-          - 23     # telnet
+          - "21"     # ftp
+          - "22"     # ssh
+          - "23"     # telnet
         proto: udp
 
     - name: disable ports
       ufw:
         rule: deny
         port:
-          - 80     # http
-          - 88     # kerberos
-          - 110    # pop3
-          - 138    # netbios
-          - 139    # smb
-          - 389    # ldap
-          - 443    # https
-          - 445    # smb
-          - 587    # smtp
-          - 2049   # nfs
-          - 3306   # mysql
-          - 3389   # rdp
-          - 8080   # alt http
-          - 8081   # alt http
+          - "80"     # http
+          - "88"     # kerberos
+          - "110"    # pop3
+          - "138"    # netbios
+          - "139"    # smb
+          - "389"    # ldap
+          - "443"    # https
+          - "445"    # smb
+          - "587"    # smtp
+          - "2049"   # nfs
+          - "3306"   # mysql
+          - "3389"   # rdp
+          - "8080"   # alt http
+          - "8081"   # alt http
         proto: any
           
     - name: allow high ports tcp
