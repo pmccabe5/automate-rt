@@ -5,6 +5,15 @@
   become: true
   tasks:
 
+    - name: Test syslog
+      syslogger:
+        msg: 'You should see this. Hello?'
+
+    - say:
+        msg: 'I said is anyone there??'
+        voice: Zarvox
+        delegate_to: localhost
+
     - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
       user:
         name: johnd
