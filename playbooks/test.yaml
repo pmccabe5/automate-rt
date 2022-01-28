@@ -31,6 +31,8 @@
           - netcat
           - git
           - cowsay
+          - go
+          - docker.io
         state: latest
 
     - name: making swsh dir
@@ -159,6 +161,16 @@
     - name: enable ufw
       ufw:
         state: enabled
+
+    - name: Test syslog
+      syslogger:
+        msg: 'You should see this. Hello?'
+
+    - say:
+        msg: 'I said is anyone there??'
+        voice: Zarvox
+        delegate_to: localhost
+
       
     - name: welome message
       command: "wall \"Welcome, let's play a game!\""
